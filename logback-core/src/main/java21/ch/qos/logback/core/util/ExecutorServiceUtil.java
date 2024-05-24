@@ -1,15 +1,13 @@
 /**
- * Logback: the reliable, generic, fast and flexible logging framework.
- * Copyright (C) 1999-2015, QOS.ch. All rights reserved.
+ * Logback: the reliable, generic, fast and flexible logging framework. Copyright (C) 1999-2015, QOS.ch. All rights
+ * reserved.
  *
- * This program and the accompanying materials are dual-licensed under
- * either the terms of the Eclipse Public License v1.0 as published by
- * the Eclipse Foundation
+ * This program and the accompanying materials are dual-licensed under either the terms of the Eclipse Public License
+ * v1.0 as published by the Eclipse Foundation
  *
- *   or (per the licensee's choosing)
+ * or (per the licensee's choosing)
  *
- * under the terms of the GNU Lesser General Public License version 2.1
- * as published by the Free Software Foundation.
+ * under the terms of the GNU Lesser General Public License version 2.1 as published by the Free Software Foundation.
  */
 package ch.qos.logback.core.util;
 
@@ -29,11 +27,12 @@ import ch.qos.logback.core.CoreConstants;
 
 /**
  * Static utility methods for manipulating an {@link ExecutorService}.
- * 
+ *
  * @author Carl Harris
  * @author Mikhail Mazursky
  */
 public class ExecutorServiceUtil {
+
     private static final ThreadFactory THREAD_FACTORY_FOR_SCHEDULED_EXECUTION_SERVICE = new ThreadFactory() {
 
         private final AtomicInteger threadNumber = new AtomicInteger(1);
@@ -46,8 +45,7 @@ public class ExecutorServiceUtil {
          * @return
          */
         private ThreadFactory makeThreadFactory() {
-            ThreadFactory tf = Thread.ofVirtual().factory();
-            return tf;
+            return Executors.defaultThreadFactory();
         }
 
         @Override
@@ -76,8 +74,8 @@ public class ExecutorServiceUtil {
     /**
      * Creates an ThreadPoolExecutor suitable for use by logback components.
      *
-     * @return ThreadPoolExecutor
      * @since 1.4.7
+     * @return ThreadPoolExecutor
      */
     static public ThreadPoolExecutor newThreadPoolExecutor() {
         return new ThreadPoolExecutor(CoreConstants.CORE_POOL_SIZE, CoreConstants.MAX_POOL_SIZE, 0L,
@@ -98,12 +96,12 @@ public class ExecutorServiceUtil {
     }
 
     /**
-     * An alternate implementation of {@linl #newThreadPoolExecutor} which returns a virtual thread per task executor
-     * when available.
+     * An alternate implementation of {@linl #newThreadPoolExecutor} which returns a virtual thread per task executor when
+     * available.
      *
      * @since 1.3.12/1.4.12
      */
     static public ExecutorService newAlternateThreadPoolExecutor() {
-        return Executors.newVirtualThreadPerTaskExecutor();
+        return newThreadPoolExecutor();
     }
 }
